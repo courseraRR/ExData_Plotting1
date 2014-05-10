@@ -1,5 +1,14 @@
-#Script to do 4 plots: Global Active Power, Voltage, Energy Submetering, and Voltage
-#as a function of time
+#' Script to do 4 plots: Global Active Power, Voltage, Energy Submetering, and Voltage
+#' as a function of time
+
+
+#if necessary download and unzip the data file to current directory 
+if(!file.exists("household_power_consumption.txt")){
+  require(utils)
+  download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",
+                "household_power_consumption.zip", method="curl") # download
+  unzip("household_power_consumption.zip" )
+}
 
 #set the path to the data file
 data.file.name<-"./household_power_consumption.txt"
@@ -22,7 +31,11 @@ with(df,{
   plot(x=date.time, y=Sub_metering_1, type='l', xlab="", ylab="Energy sub metering")
   lines(x=date.time, y=Sub_metering_2, col="red")
   lines(x=date.time, y=Sub_metering_3, col="blue")
-  #do global reactive powe
+  #do the legend
+  legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3" ), lty=1, 
+         bty="n", #the bounding box of the legend is to be removed (see project assignment plot #4)
+         col=c("black","red","blue"), )
+  #do global reactive power
   plot(x=date.time, y=Global_reactive_power, type='l',  ylab="Global Reactive Power (kilowatts)", xlab="datetime")  
 }    
 )

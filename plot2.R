@@ -1,4 +1,12 @@
-# Script to plot Global Active Power as a function of time
+#' Script to plot Global Active Power as a function of time
+
+#if necessary download and unzip the data file to current directory 
+if(!file.exists("household_power_consumption.txt")){
+  require(utils)
+  download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",
+                "household_power_consumption.zip", method="curl") # download
+  unzip("household_power_consumption.zip" )
+}
 
 #set the path to the data file
 data.file.name<-"./household_power_consumption.txt"
